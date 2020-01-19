@@ -1,0 +1,50 @@
+.calculator-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+}
+
+.title-container {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.formula-container {
+  width: 50%;
+  margin-top: 10px;
+}
+
+.formula-container h4 {
+  color: grey;
+  text-align: center;
+}
+
+.fields-container {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calculate-btn-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.result-container label {
+  color: grey;
+  margin-right: 8px;
+}
+
+.result-container span {
+  font-weight: bold;
+}
+
+.result-container hidden {
+  display: none;
+}

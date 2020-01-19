@@ -1,0 +1,29 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  align-items: center;
+}
+
+.title-box {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.form-box {
+  width: 50%;
+  justify-content: center;
+  padding: 10px;
+}
+
+.form-id label {
+  margin-right: 10px;
+}
+
+.form-id span {
+  color: grey;
+}
