@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.default-content {
+  width: 50%;
+  padding: 10px;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.formula-list-container {
+  width: 50%;
+  padding: 10px;
+  margin-top: 24px;
+}
+
+.formula-list ul {
+  margin-top: 16px;
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.formula-list li {
+  margin-bottom: 4px;
+}

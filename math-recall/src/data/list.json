@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "name": "add",
+    "formula": "a+b"
+  },
+  {
+    "id": 2,
+    "name": "subtract",
+    "formula": "a-b"
+  }
+]
