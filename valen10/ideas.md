@@ -1,0 +1,4 @@
+- increase size of ball
+- increase size of play area by dragging the box, it also restarts the game
+- finish of game will have the full screen version of a random interesting gif(TBD what goes here)
+- heart can be lost if not playing well :) So provide with new heart with some active give - "Heres your new heart"
