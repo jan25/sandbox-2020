@@ -162,6 +162,8 @@
           bricks[c][r] = { x: 0, y: 0, active: true };
         }
       }
+      bricks[0][brickRowCount - 1].active = false;
+      bricks[brickColumnCount - 1][brickRowCount - 1].active = false;
 
       var paddleHeight = 10;
       var paddleWidth = 75;
@@ -302,6 +304,14 @@
         }
       }
 
+      function resetPaddleAndBall() {
+        paddleX = Math.random() * (canvas.width - paddleWidth);
+        x = paddleX + paddleHalfWidth;
+        y = canvas.height - 2 * paddleHeight;
+        dx = 2;
+        dy = -2;
+      }
+
       function draw() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawPaddle();
@@ -326,17 +336,14 @@
           dy = -dy;
         } else if (y + dy > canvas.height + heartHalfWidth) {
           lives--;
-          if (lives === 0) {
+          if (lives < 0) {
+            stopGame();
             alert(
               "You broke all your Hearts. No worries! just refresh to get new Hearts :)"
             );
             document.location.reload();
           } else {
-            x = canvas.width / 2;
-            y = canvas.height - 2 * paddleHeight;
-            dx = 2;
-            dy = -2;
-            paddleX = (canvas.width - paddleWidth) / 2;
+            resetPaddleAndBall();
           }
         }
 
