@@ -93,7 +93,16 @@
     </div>
 
     <script>
-      var GIFS = [
+      var GIFS = (function(a) {
+        var j, x, i;
+        for (i = a.length - 1; i > 0; i--) {
+          j = Math.floor(Math.random() * (i + 1));
+          x = a[i];
+          a[i] = a[j];
+          a[j] = x;
+        }
+        return a;
+      })([
         "https://media.giphy.com/media/dG79iTcCx23Oo/giphy.gif",
         "https://media.giphy.com/media/7k3ThwwMXnHCE/giphy.gif",
         "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif",
@@ -103,8 +112,10 @@
         "https://media.giphy.com/media/5dUllWbKVlaqmMTvHb/giphy.gif",
         "https://media.giphy.com/media/oDzZcpDm6AYKI/giphy.gif",
         "https://media.giphy.com/media/l0Hek8mXSBY772iMo/giphy.gif",
-        "https://media.giphy.com/media/xThtannt70SCAtcnSw/giphy.gif"
-      ];
+        "https://media.giphy.com/media/xThtannt70SCAtcnSw/giphy.gif",
+        "https://media.giphy.com/media/26xBzKsEllzJUcdgI/giphy.gif",
+        "https://media.giphy.com/media/ZzquuaCvjrX8I/giphy.gif"
+      ]);
       var GIF_BG = "https://media.giphy.com/media/XbsB79zhtQB9eUsBaU/giphy.gif";
 
       var gifi = 0;
@@ -164,6 +175,7 @@
       }
       bricks[0][brickRowCount - 1].active = false;
       bricks[brickColumnCount - 1][brickRowCount - 1].active = false;
+      score = 2;
 
       var paddleHeight = 10;
       var paddleWidth = 75;
@@ -207,7 +219,7 @@
       var heartHeightAdj = heartHalfHeight / 2;
 
       function updateProgress() {
-        var w = 100 * (score / (brickColumnCount * brickRowCount));
+        var w = 100 * ((score - 2) / (brickColumnCount * brickRowCount - 2));
         $(".progress-bar").css("width", w + "%");
       }
 
