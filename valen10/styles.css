@@ -1,0 +1,43 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  border: 1px solid black;
+  display: block;
+  margin: 0 auto;
+}
+
+#main {
+  display: flex;
+  /* text-align: center; */
+  justify-content: center;
+  align-content: center;
+  height: 80%;
+}
+
+#game {
+  text-align: center;
+  align-self: center;
+}
+
+#gifs {
+  display: none;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#show-another {
+  font-weight: bold;
+}
+#show-another:hover,
+#debug-gif:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.progress {
+  margin-bottom: 15px;
+}
