@@ -272,8 +272,6 @@
                 score++;
                 updateProgress();
                 if (score == brickRowCount * brickColumnCount) {
-                  // alert("YOU WIN, CONGRATULATIONS!");
-                  // document.location.reload();
                   handleGameFinish();
                 }
               }
@@ -284,7 +282,7 @@
 
       function handleGameFinish() {
         stopGame();
-        toggleGifs();
+        setTimeout(toggleGifs, 500);
       }
 
       function drawLives() {
@@ -332,6 +330,7 @@
             alert(
               "You broke all your Hearts. No worries! just refresh to get new Hearts :)"
             );
+            document.location.reload();
           } else {
             x = canvas.width / 2;
             y = canvas.height - 2 * paddleHeight;
