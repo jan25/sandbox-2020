@@ -320,6 +320,7 @@
         if (y + dy < heartHalfWidth) {
           dy = -dy;
         } else if (
+          y < canvas.height - heartHalfWidth &&
           y + dy > canvas.height - heartHalfWidth - paddleHeight &&
           x > paddleX &&
           x < paddleX + paddleWidth
@@ -331,10 +332,9 @@
             alert(
               "You broke all your Hearts. No worries! just refresh to get new Hearts :)"
             );
-            document.location.reload();
           } else {
             x = canvas.width / 2;
-            y = canvas.height - 30;
+            y = canvas.height - 2 * paddleHeight;
             dx = 2;
             dy = -2;
             paddleX = (canvas.width - paddleWidth) / 2;
@@ -352,12 +352,11 @@
             paddleX = 0;
           }
         }
-
-        animationId = requestAnimationFrame(draw);
       }
+      animationId = setInterval(draw, 15);
 
       function stopGame() {
-        cancelAnimationFrame(animationId);
+        clearInterval(animationId);
       }
       draw();
     </script>
