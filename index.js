@@ -7,21 +7,8 @@ var GIFS = (function(a) {
     a[j] = x;
   }
   return a;
-})([
-  "https://media.giphy.com/media/dG79iTcCx23Oo/giphy.gif",
-  "https://media.giphy.com/media/7k3ThwwMXnHCE/giphy.gif",
-  "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif",
-  "https://media.giphy.com/media/VNFJZ6mpsvfHO/giphy.gif",
-  "https://media.giphy.com/media/o0QIJqoObOK1G/giphy.gif",
-  "https://media.giphy.com/media/l4pTdcifPZLpDjL1e/giphy.gif",
-  "https://media.giphy.com/media/5dUllWbKVlaqmMTvHb/giphy.gif",
-  "https://media.giphy.com/media/oDzZcpDm6AYKI/giphy.gif",
-  "https://media.giphy.com/media/l0Hek8mXSBY772iMo/giphy.gif",
-  "https://media.giphy.com/media/xThtannt70SCAtcnSw/giphy.gif",
-  "https://media.giphy.com/media/26xBzKsEllzJUcdgI/giphy.gif",
-  "https://media.giphy.com/media/ZzquuaCvjrX8I/giphy.gif"
-]);
-var GIF_BG = "https://media.giphy.com/media/XbsB79zhtQB9eUsBaU/giphy.gif";
+})(THIRDPARTY_URLS.gifs.slice(1));
+var GIF_BG = THIRDPARTY_URLS.gifs[0];
 
 var gifi = 0;
 function nextGif() {
@@ -134,6 +121,13 @@ function drawHeart() {
   ctx.fillText(h, x - heartHalfWidth, y + heartHalfHeight);
 }
 
+function expandHeart() {
+  heartWidth += 6;
+  heartHeight += 6;
+  heartHalfWidth = heartHalfHeight = heartHeight / 2;
+  heartHeightAdj = heartHalfHeight / 2;
+}
+
 function drawPaddle() {
   ctx.beginPath();
   ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
@@ -188,6 +182,7 @@ function collisionDetection() {
           if (score == brickRowCount * brickColumnCount) {
             handleGameFinish();
           }
+          // expandHeart();
         }
       }
     }
