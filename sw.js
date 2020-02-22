@@ -3,10 +3,11 @@ importScripts("helpers/thirdparty.js");
 
 var CACHED = [
   "/",
-  "/index.html",
-  "/assets/favicon.png",
+  "index.html",
+  "assets/favicon.png",
   "styles.css",
   "helpers/sw-helper.js",
+  "helpers/sw-polyfill.js",
   "helpers/thirdparty.js",
   "index.js"
 ]
