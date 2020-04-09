@@ -1,0 +1,10 @@
+.top-grid {
+  display: flex;
+  flex-direction: column;
+  border: 2px black solid;
+}
+
+.top-grid-row {
+  display: flex;
+  flex-direction: row;
+}
