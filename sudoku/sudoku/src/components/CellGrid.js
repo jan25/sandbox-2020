@@ -11,18 +11,22 @@ class CellGrid extends Component {
     return (
       <div className="cell-container">
         {rowNums.map((row) => {
-          return rowNums.map((row) => <div class="cell">{row}</div>);
+          return rowNums.map((row) => (
+            <div className="cell">
+              <h2>{row}</h2>
+            </div>
+          ));
         })}
       </div>
     );
   }
 
-  renderCells() {
-    let rowNums = [1, 2, 3];
-    return rowNums.map((row) => {
-      rowNums.map((row) => <div class="cell">{row}</div>);
-    });
-  }
+  // renderCells() {
+  //   let rowNums = [1, 2, 3];
+  //   return rowNums.map((row) => {
+  //     rowNums.map((row) => <div className="cell">{row}</div>);
+  //   });
+  // }
 }
 
 export default CellGrid;

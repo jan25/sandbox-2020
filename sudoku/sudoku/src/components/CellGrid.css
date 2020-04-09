@@ -10,4 +10,11 @@
   flex-grow: 1;
   flex-basis: 30%;
   border: 1px black solid;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+}
+
+.cell h2 {
+  width: 100%;
 }
