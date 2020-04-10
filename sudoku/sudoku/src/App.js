@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       board: [[]],
       stack: [],
+      incorrect: [],
       gameon: false,
     };
     this.generator = new Generator();
@@ -33,6 +34,7 @@ class App extends Component {
           <h1>Sudoku</h1>
           <TopGrid
             board={this.state.board}
+            added={this.state.stack}
             onNewNumberDrop={this.onNewNumberDrop}
             lastCoords={this.getLastCoords()}
           />

@@ -5,12 +5,16 @@ import "./CellGrid.css";
 class CellGrid extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      draghover: [-1, -1],
+    };
 
     this.allowDrop = this.allowDrop.bind(this);
+    this.onDragEnter = this.onDragEnter.bind(this);
+    this.onDragLeave = this.onDragLeave.bind(this);
+    this.onDrop = this.onDrop.bind(this);
   }
   render() {
-    console.log("CellGrid", this.props.board);
     let rows = _.range(3).map((dx) => this.props.row * 3 + dx);
     let cols = _.range(3).map((dy) => this.props.col * 3 + dy);
     let key = 0;
@@ -20,16 +24,16 @@ class CellGrid extends Component {
           return cols.map((col) => (
             <div
               key={key++}
-              className={"cell" + (this.isLast(row, col) ? " latest" : "")}
+              className={
+                "cell " + this.getFontClass(row, col)
+
+                // (this.addDragOverClass(row, col) ? " draghover" : "")
+              }
               onDragOver={(ev) =>
                 this.allowDrop(ev, this.props.board[row][col])
               }
-              onDragEnter={(ev) =>
-                this.onDragEnter(ev, this.props.board[row][col])
-              }
-              onDragLeave={(ev) =>
-                this.onDragLeave(ev, this.props.board[row][col])
-              }
+              onDragEnter={(ev) => this.onDragEnter(ev, row, col)}
+              onDragLeave={(ev) => this.onDragLeave(ev, row, col)}
               onDrop={(ev) => this.onDrop(ev, row, col)}
             >
               {this.props.board[row][col] > 0 ? (
@@ -44,22 +48,50 @@ class CellGrid extends Component {
     );
   }
 
+  getFontClass(row, col) {
+    if (this.isLast(row, col)) {
+      return "latest";
+    }
+    if (this.isAdded(row, col)) {
+      return "correct";
+    }
+    return "";
+  }
+
+  isAdded(row, col) {
+    return _.find(this.props.added, ([i, j]) => {
+      return i == row && j == col;
+    });
+  }
+
   isLast(row, col) {
     return _.isEqual([row, col], this.props.lastCoords);
   }
 
-  onDragEnter(event, cell) {
-    if (cell > 0) {
-      return;
-    }
-    // TODO add css
+  addDragOverClass(row, col) {
+    // FIXME
+    return false;
+    // return _.isEqual(this.state.draghover, [row, col]);
   }
 
-  onDragLeave(event, cell) {
-    if (cell > 0) {
+  onDragEnter(event, row, col) {
+    if (this.props.board[row][col] > 0) {
       return;
     }
-    // TODO remove css
+    this.setState({
+      draghover: [row, col],
+    });
+    console.log("Entered:", row, col);
+  }
+
+  onDragLeave(event, row, col) {
+    if (this.props.board[row][col] > 0) {
+      return;
+    }
+    this.setState({
+      draghover: [-1, -1],
+    });
+    console.log("Left:", row, col);
   }
 
   onDrop(event, row, col) {

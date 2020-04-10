@@ -20,6 +20,10 @@
   cursor: pointer;
 }
 
+.draghover {
+  background-color: blanchedalmond;
+}
+
 .latest {
   color: green;
 }
