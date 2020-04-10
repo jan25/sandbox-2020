@@ -17,4 +17,9 @@
 
 .cell h2 {
   width: 100%;
+  cursor: pointer;
+}
+
+.last {
+  color: green;
 }

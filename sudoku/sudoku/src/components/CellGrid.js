@@ -7,7 +7,7 @@ class CellGrid extends Component {
     super(props);
     this.state = {};
 
-    this.allowDrop.bind(this);
+    this.allowDrop = this.allowDrop.bind(this);
   }
   render() {
     console.log("CellGrid", this.props.board);
@@ -20,7 +20,7 @@ class CellGrid extends Component {
           return cols.map((col) => (
             <div
               key={key++}
-              className="cell"
+              className={"cell" + (this.isLast(row, col) ? " last" : "")}
               onDragOver={(ev) =>
                 this.allowDrop(ev, this.props.board[row][col])
               }
@@ -30,7 +30,7 @@ class CellGrid extends Component {
               onDragLeave={(ev) =>
                 this.onDragLeave(ev, this.props.board[row][col])
               }
-              onDrop={(ev) => this.onDrop(ev)}
+              onDrop={(ev) => this.onDrop(ev, row, col)}
             >
               {this.props.board[row][col] > 0 ? (
                 <h2>{this.props.board[row][col]}</h2>
@@ -42,6 +42,10 @@ class CellGrid extends Component {
         })}
       </div>
     );
+  }
+
+  isLast(row, col) {
+    return _.isEqual([row, col], this.props.lastCoords);
   }
 
   onDragEnter(event, cell) {
@@ -58,10 +62,9 @@ class CellGrid extends Component {
     // TODO remove css
   }
 
-  onDrop(event) {
-    var newCell = event.dataTransfer.getData("number");
-    console.log("drop: ", newCell);
-    // TODO add to current cell and update state
+  onDrop(event, row, col) {
+    var value = event.dataTransfer.getData("number");
+    this.props.onNewNumberDrop(row, col, value);
   }
 
   allowDrop(event, cell) {

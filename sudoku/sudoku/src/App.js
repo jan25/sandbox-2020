@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import _ from "lodash";
 import "./App.css";
 import TopGrid from "./components/TopGrid";
 import Numbers from "./components/Numbers";
@@ -13,6 +14,8 @@ class App extends Component {
       gameon: false,
     };
     this.generator = new Generator();
+    this.onNewNumberDrop = this.onNewNumberDrop.bind(this);
+    this.getLastCoords = this.getLastCoords.bind(this);
   }
 
   componentDidMount() {
@@ -27,11 +30,32 @@ class App extends Component {
       <React.Fragment>
         <div className="app">
           <h1>Sudoku</h1>
-          <TopGrid board={this.state.board} />
+          <TopGrid
+            board={this.state.board}
+            onNewNumberDrop={this.onNewNumberDrop}
+            lastCoords={this.getLastCoords()}
+          />
           <Numbers />
         </div>
       </React.Fragment>
     );
+  }
+
+  onNewNumberDrop(row, col, num) {
+    console.log("drop: ", num, "at: ", row, col);
+    let newBoard = _.cloneDeep(this.state.board);
+    newBoard[row][col] = num;
+    this.setState({
+      board: newBoard,
+      stack: _.concat(this.state.stack, [[row, col]]),
+    });
+  }
+
+  getLastCoords() {
+    if (this.state.stack.length == 0) {
+      return [-1, -1];
+    }
+    return _.last(this.state.stack);
   }
 }
 
