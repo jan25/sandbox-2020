@@ -37,7 +37,9 @@ class CellGrid extends Component {
               onDrop={(ev) => this.onDrop(ev, row, col)}
             >
               {this.props.board[row][col] > 0 ? (
-                <h2>{this.props.board[row][col]}</h2>
+                <h2 onDoubleClick={() => this.props.removeNumber(row, col)}>
+                  {this.props.board[row][col]}
+                </h2>
               ) : (
                 <h2>0</h2> /* FIXME keep line height for empty cells */
               )}

@@ -27,6 +27,7 @@ class TopGrid extends Component {
                   board={this.props.board}
                   row={row}
                   col={col}
+                  removeNumber={this.props.removeNumber}
                   onNewNumberDrop={this.props.onNewNumberDrop}
                   lastCoords={this.props.lastCoords}
                   added={this.props.added}

@@ -15,6 +15,7 @@ class App extends Component {
       gameon: false,
     };
     this.generator = new Generator();
+    this.removeNumber = this.removeNumber.bind(this);
     this.onNewNumberDrop = this.onNewNumberDrop.bind(this);
     this.getLastCoords = this.getLastCoords.bind(this);
     this.reset = this.reset.bind(this);
@@ -35,6 +36,7 @@ class App extends Component {
           <TopGrid
             board={this.state.board}
             added={this.state.stack}
+            removeNumber={this.removeNumber}
             onNewNumberDrop={this.onNewNumberDrop}
             lastCoords={this.getLastCoords()}
           />
@@ -43,6 +45,10 @@ class App extends Component {
         </div>
       </React.Fragment>
     );
+  }
+
+  removeNumber(row, col) {
+    console.log("removing: ", row, col);
   }
 
   onNewNumberDrop(row, col, num) {
