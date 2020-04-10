@@ -20,7 +20,7 @@ class CellGrid extends Component {
           return cols.map((col) => (
             <div
               key={key++}
-              className={"cell" + (this.isLast(row, col) ? " last" : "")}
+              className={"cell" + (this.isLast(row, col) ? " latest" : "")}
               onDragOver={(ev) =>
                 this.allowDrop(ev, this.props.board[row][col])
               }

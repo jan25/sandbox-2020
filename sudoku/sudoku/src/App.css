@@ -11,6 +11,8 @@ body,
   /* removed scroll bar */
   margin: 0;
   overflow: hidden;
+
+  background-color: #d4d4d4;
 }
 
 .app {

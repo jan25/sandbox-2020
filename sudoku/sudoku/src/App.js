@@ -16,6 +16,7 @@ class App extends Component {
     this.generator = new Generator();
     this.onNewNumberDrop = this.onNewNumberDrop.bind(this);
     this.getLastCoords = this.getLastCoords.bind(this);
+    this.reset = this.reset.bind(this);
   }
 
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends Component {
             lastCoords={this.getLastCoords()}
           />
           <Numbers />
+          <button onClick={this.reset}>reset</button>
         </div>
       </React.Fragment>
     );
@@ -48,6 +50,17 @@ class App extends Component {
     this.setState({
       board: newBoard,
       stack: _.concat(this.state.stack, [[row, col]]),
+    });
+  }
+
+  reset() {
+    let resetBoard = _.cloneDeep(this.state.board);
+    for (let [i, j] of this.state.stack) {
+      resetBoard[i][j] = 0;
+    }
+    this.setState({
+      board: resetBoard,
+      stack: [],
     });
   }
 

@@ -20,6 +20,14 @@
   cursor: pointer;
 }
 
-.last {
+.latest {
   color: green;
+}
+
+.correct {
+  color: grey;
+}
+
+.wrong {
+  color: red;
 }
