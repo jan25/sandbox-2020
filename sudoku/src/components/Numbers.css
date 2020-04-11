@@ -1,0 +1,19 @@
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 60%;
+  justify-content: space-evenly;
+}
+
+.vertical {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  margin-left: 20px;
+  align-content: space-evenly;
+}
+
+.number {
+  cursor: grab;
+}

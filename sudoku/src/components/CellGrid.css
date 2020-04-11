@@ -1,0 +1,57 @@
+.cell-container {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  flex-flow: row wrap;
+  border: 2px black solid;
+}
+
+.cell {
+  flex-grow: 1;
+  flex-basis: 30%;
+  border: 1px black solid;
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+}
+
+.cell h2 {
+  width: 100%;
+  cursor: pointer;
+}
+
+.draghover {
+  background-color: blanchedalmond;
+}
+
+.hidden > h2 {
+  visibility: hidden;
+}
+
+.latest {
+  color: green;
+}
+
+.correct {
+  color: grey;
+}
+
+.incorrect {
+  color: red;
+}
+
+.finished {
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

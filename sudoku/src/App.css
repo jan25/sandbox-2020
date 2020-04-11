@@ -1,0 +1,60 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body,
+#root {
+  width: 100%;
+  height: 100%;
+
+  /* removed scroll bar */
+  margin: 0;
+  overflow: hidden;
+
+  background-color: #d4d4d4;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.welldone {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.top-controls {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-controls {
+  width: 50%;
+  height: 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.control-buttons > button {
+  margin-left: 10px;
+}
