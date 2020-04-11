@@ -40,7 +40,6 @@ export let isGameFinished = (board) => {
   for (let i = 0; i < msz; ++i) {
     for (let j = 0; j < msz; ++j) {
       let nums = getBoxNums(i, j);
-      console.log("boxNums: ", i, j, nums);
       if (_.uniq(nums).length !== sz) {
         return false;
       }

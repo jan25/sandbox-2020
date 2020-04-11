@@ -108,7 +108,7 @@ class CellGrid extends Component {
   }
 
   onDrop(event, row, col) {
-    var value = event.dataTransfer.getData("number");
+    var value = parseInt(event.dataTransfer.getData("number"));
     this.props.onNewNumberDrop(row, col, value);
   }
 
