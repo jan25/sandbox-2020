@@ -24,6 +24,10 @@
   background-color: blanchedalmond;
 }
 
+.hidden > h2 {
+  visibility: hidden;
+}
+
 .latest {
   color: green;
 }

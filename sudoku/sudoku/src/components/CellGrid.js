@@ -52,6 +52,9 @@ class CellGrid extends Component {
   }
 
   getFontClass(row, col) {
+    if (this.props.board[row][col] === 0) {
+      return " hidden ";
+    }
     if (this.isLast(row, col)) {
       return this.props.isLastIncorrect ? "incorrect" : "latest";
     }
