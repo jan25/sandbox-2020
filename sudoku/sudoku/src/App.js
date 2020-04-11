@@ -31,20 +31,24 @@ class App extends Component {
   render() {
     console.log("App", this.state.board);
     const finished = this.isGameFinished();
+    // let finished = true;
     return (
       <React.Fragment>
         <div className="app">
-          <h1>Sudoku</h1>
           {!finished ? this.renderTopControls() : ""}
-          <TopGrid
-            board={this.state.board}
-            added={this.state.stack}
-            removeNumber={this.removeNumber}
-            onNewNumberDrop={this.onNewNumberDrop}
-            lastCoords={this.getLastCoords()}
-            isLastIncorrect={this.isLastIncorrect()}
-            isGameFinished={finished}
-          />
+          <div className="grid-row">
+            {!finished ? this.renderSideControls() : ""}
+            <TopGrid
+              board={this.state.board}
+              added={this.state.stack}
+              removeNumber={this.removeNumber}
+              onNewNumberDrop={this.onNewNumberDrop}
+              lastCoords={this.getLastCoords()}
+              isLastIncorrect={this.isLastIncorrect()}
+              isGameFinished={finished}
+            />
+            {!finished ? this.renderSideControls() : ""}
+          </div>
           {!finished ? this.renderBottomControls() : this.renderWellDone()}
         </div>
       </React.Fragment>
@@ -54,7 +58,15 @@ class App extends Component {
   renderTopControls() {
     return (
       <div className="top-controls">
-        <Numbers />
+        <Numbers vertical={false} />
+      </div>
+    );
+  }
+
+  renderSideControls() {
+    return (
+      <div className="side-controls">
+        <Numbers vertical={true} />
       </div>
     );
   }
@@ -62,7 +74,7 @@ class App extends Component {
   renderBottomControls() {
     return (
       <div className="bottom-controls">
-        <Numbers />
+        <Numbers vertical={false} />
         <button onClick={this.reset}>Reset</button>
       </div>
     );
