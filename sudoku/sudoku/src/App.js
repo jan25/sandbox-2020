@@ -11,7 +11,6 @@ class App extends Component {
     this.state = {
       board: [[]],
       stack: [],
-      incorrect: [],
       gameon: false,
     };
     this.generator = new Generator();
@@ -49,6 +48,22 @@ class App extends Component {
 
   removeNumber(row, col) {
     console.log("removing: ", row, col);
+    let i = _.findIndex(this.state.stack, ([x, y]) => {
+      return x == row && y == col;
+    });
+    if (i == -1) return;
+
+    let [x, y] = this.state.stack[i];
+    let newBoard = _.cloneDeep(this.state.board);
+    newBoard[x][y] = 0;
+    let newStack = _.concat(
+      _.slice(this.state.stack, 0, i),
+      _.slice(this.state.stack, i + 1)
+    );
+    this.setState({
+      board: newBoard,
+      stack: newStack,
+    });
   }
 
   onNewNumberDrop(row, col, num) {
