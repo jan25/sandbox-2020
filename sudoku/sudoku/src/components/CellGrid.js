@@ -27,7 +27,6 @@ class CellGrid extends Component {
               className={
                 "cell " +
                 this.getFontClass(row, col) +
-                this.addGameFinishedClass() +
                 (this.addDragOverClass(row, col) ? " draghover" : "")
               }
               onDragOver={(ev) =>
@@ -52,6 +51,9 @@ class CellGrid extends Component {
   }
 
   getFontClass(row, col) {
+    if (this.props.isGameFinished) {
+      return " finished ";
+    }
     if (this.props.board[row][col] === 0) {
       return " hidden ";
     }
@@ -60,13 +62,6 @@ class CellGrid extends Component {
     }
     if (this.isAdded(row, col)) {
       return "correct";
-    }
-    return "";
-  }
-
-  addGameFinishedClass() {
-    if (this.props.isGameFinished) {
-      return " finished ";
     }
     return "";
   }

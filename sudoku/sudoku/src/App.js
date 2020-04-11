@@ -109,7 +109,7 @@ class App extends Component {
   renderWellDone() {
     return (
       <div className="welldone">
-        <p>Well Done!</p>
+        <h3>Well Done!</h3>
         <Button variant="success" size="sm" onClick={this.newPuzzle}>
           New Puzzle
         </Button>

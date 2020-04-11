@@ -27,19 +27,22 @@ export let isGameFinished = (board) => {
 
   for (let row = 0; row < sz; ++row) {
     let nums = getRowNums(board, row);
+    console.log("row", nums);
     if (_.uniq(nums).length !== sz) {
       return false;
     }
   }
   for (let col = 0; col < sz; ++col) {
     let nums = getColNums(board, col);
+    console.log("col", nums);
     if (_.uniq(nums).length !== sz) {
       return false;
     }
   }
   for (let i = 0; i < msz; ++i) {
     for (let j = 0; j < msz; ++j) {
-      let nums = getBoxNums(i, j);
+      let nums = getBoxNums(board, i * msz, j * msz);
+      console.log("box", nums);
       if (_.uniq(nums).length !== sz) {
         return false;
       }
@@ -60,21 +63,21 @@ let getColNums = (board, y) => {
 
 let getBoxNums = (board, x, y) => {
   const sz = 3;
-  for (let i = 0; i < sz; ++i) {
-    for (let j = 0; j < sz; ++j) {
-      let [r, c] = [i * sz, j * sz];
-      let [rr, cc] = [r + sz, c + sz];
-      if (x >= r && y >= c && x < rr && y < cc) {
-        let nums = [];
-        for (let k = r; k < rr; ++k) {
-          for (let l = c; l < cc; ++l) {
-            nums.push(board[k][l]);
-          }
-        }
-        return nums;
-      }
+  let nums = [];
+  let cornerIdx = _.map(_.range(3), (i) => i * 3);
+  console.log(cornerIdx);
+  while (x >= 0 && !cornerIdx.includes(x)) {
+    x--;
+  }
+  while (y >= 0 && !cornerIdx.includes(y)) {
+    y--;
+  }
+  for (let k = x; k < x + sz; ++k) {
+    for (let l = y; l < y + sz; ++l) {
+      nums.push(board[k][l]);
     }
   }
+  return nums;
 };
 
 let hasDuplicate = (array, num) => {

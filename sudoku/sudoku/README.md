@@ -6,6 +6,13 @@ The goal of Sudoku is to fill a 9×9 grid with numbers so that each row, column 
 
 Click here to solve puzzles [jan25/Sudoku](TODO)
 
+## Develop
+
+```
+npm install
+npm start
+```
+
 ### TODO
 
 - ~~Remove '0' number from empty cells~~
