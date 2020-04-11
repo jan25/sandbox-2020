@@ -1,0 +1,11 @@
+.numbers-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 40%;
+  justify-content: space-evenly;
+}
+
+.number {
+  cursor: grab;
+}
