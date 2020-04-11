@@ -30,6 +30,7 @@ class TopGrid extends Component {
                   removeNumber={this.props.removeNumber}
                   onNewNumberDrop={this.props.onNewNumberDrop}
                   lastCoords={this.props.lastCoords}
+                  isLastIncorrect={this.props.isLastIncorrect}
                   added={this.props.added}
                 />
               ))}

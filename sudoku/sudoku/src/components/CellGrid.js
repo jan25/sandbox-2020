@@ -52,7 +52,7 @@ class CellGrid extends Component {
 
   getFontClass(row, col) {
     if (this.isLast(row, col)) {
-      return "latest";
+      return this.props.isLastIncorrect ? "incorrect" : "latest";
     }
     if (this.isAdded(row, col)) {
       return "correct";
@@ -62,7 +62,7 @@ class CellGrid extends Component {
 
   isAdded(row, col) {
     return _.find(this.props.added, ([i, j]) => {
-      return i == row && j == col;
+      return i === row && j === col;
     });
   }
 
@@ -102,7 +102,7 @@ class CellGrid extends Component {
   }
 
   allowDrop(event, cell) {
-    if (cell == 0) {
+    if (cell === 0) {
       event.preventDefault();
     }
   }

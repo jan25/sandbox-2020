@@ -4,6 +4,7 @@ import "./App.css";
 import TopGrid from "./components/TopGrid";
 import Numbers from "./components/Numbers";
 import Generator from "./components/Generator";
+import { isIncorrect } from "./components/Utils";
 
 class App extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class App extends Component {
     this.removeNumber = this.removeNumber.bind(this);
     this.onNewNumberDrop = this.onNewNumberDrop.bind(this);
     this.getLastCoords = this.getLastCoords.bind(this);
+    this.isLastIncorrect = this.isLastIncorrect.bind(this);
     this.reset = this.reset.bind(this);
   }
 
@@ -38,6 +40,7 @@ class App extends Component {
             removeNumber={this.removeNumber}
             onNewNumberDrop={this.onNewNumberDrop}
             lastCoords={this.getLastCoords()}
+            isLastIncorrect={this.isLastIncorrect()}
           />
           <Numbers />
           <button onClick={this.reset}>reset</button>
@@ -47,11 +50,11 @@ class App extends Component {
   }
 
   removeNumber(row, col) {
-    console.log("removing: ", row, col);
+    // console.log("removing: ", row, col);
     let i = _.findIndex(this.state.stack, ([x, y]) => {
-      return x == row && y == col;
+      return x === row && y === col;
     });
-    if (i == -1) return;
+    if (i === -1) return;
 
     let [x, y] = this.state.stack[i];
     let newBoard = _.cloneDeep(this.state.board);
@@ -67,7 +70,7 @@ class App extends Component {
   }
 
   onNewNumberDrop(row, col, num) {
-    console.log("drop: ", num, "at: ", row, col);
+    // console.log("drop: ", num, "at: ", row, col);
     let newBoard = _.cloneDeep(this.state.board);
     newBoard[row][col] = num;
     this.setState({
@@ -88,10 +91,14 @@ class App extends Component {
   }
 
   getLastCoords() {
-    if (this.state.stack.length == 0) {
+    if (this.state.stack.length === 0) {
       return [-1, -1];
     }
     return _.last(this.state.stack);
+  }
+
+  isLastIncorrect() {
+    return isIncorrect(this.state.board, this.getLastCoords());
   }
 }
 
