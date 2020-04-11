@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button } from "react-bootstrap";
 import _ from "lodash";
 import "./App.css";
 import TopGrid from "./components/TopGrid";
@@ -76,20 +77,34 @@ class App extends Component {
     return (
       <div className="bottom-controls">
         <Numbers vertical={false} />
-        {this.state.stack.length > 0 ? (
-          <button onClick={this.reset}>Reset</button>
-        ) : (
-          ""
-        )}
+        <div className="control-buttons">
+          {this.state.stack.length > 0 ? (
+            // <button onClick={this.reset}>Reset</button>
+            <Button variant="outline-danger" size="sm" onClick={this.reset}>
+              Reset
+            </Button>
+          ) : (
+            ""
+          )}
+          <Button variant="outline-primary" size="sm" onClick={this.renderInfo}>
+            Info
+          </Button>
+        </div>
       </div>
     );
+  }
+
+  renderInfo() {
+    console.log("render info");
   }
 
   renderWellDone() {
     return (
       <div className="welldone">
         <p>Well Done!</p>
-        <button onClick={this.newPuzzle}>New Puzzle</button>
+        <Button variant="success" size="sm" onClick={this.newPuzzle}>
+          New Puzzle
+        </Button>
       </div>
     );
   }

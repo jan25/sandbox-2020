@@ -54,3 +54,7 @@ body,
   flex-direction: column;
   align-items: center;
 }
+
+.control-buttons > button {
+  margin-left: 10px;
+}
