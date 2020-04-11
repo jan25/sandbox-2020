@@ -1,19 +1,20 @@
 import _ from "lodash";
+import data from "../generator/puzzles.json";
 
 // const SIZE = 9;
 
 // Grabbed from https://en.wikipedia.org/wiki/Sudoku
-const SAMPLE = [
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],
-];
+// const SAMPLE = [
+//   [5, 3, 0, 0, 7, 0, 0, 0, 0],
+//   [6, 0, 0, 1, 9, 5, 0, 0, 0],
+//   [0, 9, 8, 0, 0, 0, 0, 6, 0],
+//   [8, 0, 0, 0, 6, 0, 0, 0, 3],
+//   [4, 0, 0, 8, 0, 3, 0, 0, 1],
+//   [7, 0, 0, 0, 2, 0, 0, 0, 6],
+//   [0, 6, 0, 0, 0, 0, 2, 8, 0],
+//   [0, 0, 0, 4, 1, 9, 0, 0, 5],
+//   [0, 0, 0, 0, 8, 0, 0, 7, 9],
+// ];
 
 export default class Generator {
   generate() {
@@ -47,7 +48,9 @@ export default class Generator {
   }
 
   _generate() {
-    // TODO actually generate with algorithm
-    return _.cloneDeep(SAMPLE);
+    // TODO actually write my own algorithm
+    let puzzles = data["puzzles"];
+    let pi = _.random(0, puzzles.length - 1);
+    return puzzles[pi];
   }
 }
