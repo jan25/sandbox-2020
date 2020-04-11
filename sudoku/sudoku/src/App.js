@@ -34,9 +34,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("App", this.state.board);
     const finished = this.isGameFinished();
-    // let finished = true;
     return (
       <React.Fragment>
         <div className="app">
