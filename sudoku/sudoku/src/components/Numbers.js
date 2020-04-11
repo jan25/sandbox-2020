@@ -32,7 +32,6 @@ class Numbers extends Component {
 
   onDragStart(event, num) {
     event.dataTransfer.setData("number", num);
-    console.log("onDragStart", num);
   }
 }
 

@@ -87,19 +87,18 @@ class App extends Component {
           ) : (
             ""
           )}
-          {/* <Button variant="outline-primary" size="sm" onClick={this.toggleInfo}>
+          <Button variant="outline-primary" size="sm" onClick={this.toggleInfo}>
             Info
           </Button>
           <div ref={this.gameAreaRef}>
             <Info onInfoHide={this.toggleInfo} show={this.state.showInfo} />
-          </div> */}
+          </div>
         </div>
       </div>
     );
   }
 
   toggleInfo() {
-    console.log("render info");
     const now = this.state.showInfo;
     this.setState({
       showInfo: !now,
@@ -148,7 +147,6 @@ class App extends Component {
   }
 
   newPuzzle() {
-    console.log("new puzzle");
     this.setState({
       board: this.generator.generate(),
       stack: [],

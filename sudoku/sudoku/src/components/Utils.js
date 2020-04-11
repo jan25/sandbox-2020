@@ -27,14 +27,12 @@ export let isGameFinished = (board) => {
 
   for (let row = 0; row < sz; ++row) {
     let nums = getRowNums(board, row);
-    console.log("row", nums);
     if (_.uniq(nums).length !== sz) {
       return false;
     }
   }
   for (let col = 0; col < sz; ++col) {
     let nums = getColNums(board, col);
-    console.log("col", nums);
     if (_.uniq(nums).length !== sz) {
       return false;
     }
@@ -42,7 +40,6 @@ export let isGameFinished = (board) => {
   for (let i = 0; i < msz; ++i) {
     for (let j = 0; j < msz; ++j) {
       let nums = getBoxNums(board, i * msz, j * msz);
-      console.log("box", nums);
       if (_.uniq(nums).length !== sz) {
         return false;
       }
@@ -65,7 +62,6 @@ let getBoxNums = (board, x, y) => {
   const sz = 3;
   let nums = [];
   let cornerIdx = _.map(_.range(3), (i) => i * 3);
-  console.log(cornerIdx);
   while (x >= 0 && !cornerIdx.includes(x)) {
     x--;
   }
