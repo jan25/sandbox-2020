@@ -16,6 +16,6 @@ Sudoku game and generator written in Javascript.
 - Highlight cell when dragging to drop
 - ~~end of game: blinking numbers with 'Well Done' message. Also, with 'new game' button~~
 - ~~Put numbers strip on all 4 sides of grid~~
-- Info dialog
+- ~~Info dialog~~ fix console errors
 - Implement generator logic
 - Mobile site support

@@ -11,8 +11,8 @@ class CellGrid extends Component {
 
     this.allowDrop = this.allowDrop.bind(this);
     this.onDragEnter = this.onDragEnter.bind(this);
-    this.onDragLeave = this.onDragLeave.bind(this);
     this.onDrop = this.onDrop.bind(this);
+    this.addDragOverClass = this.addDragOverClass.bind(this);
   }
   render() {
     let rows = _.range(3).map((dx) => this.props.row * 3 + dx);
@@ -27,8 +27,8 @@ class CellGrid extends Component {
               className={
                 "cell " +
                 this.getFontClass(row, col) +
-                this.addGameFinishedClass()
-                // (this.addDragOverClass(row, col) ? " draghover" : "")
+                this.addGameFinishedClass() +
+                (this.addDragOverClass(row, col) ? " draghover" : "")
               }
               onDragOver={(ev) =>
                 this.allowDrop(ev, this.props.board[row][col])
@@ -42,7 +42,7 @@ class CellGrid extends Component {
                   {this.props.board[row][col]}
                 </h2>
               ) : (
-                <h2>0</h2> /* FIXME keep line height for empty cells */
+                <h2>0</h2>
               )}
             </div>
           ));
@@ -82,33 +82,25 @@ class CellGrid extends Component {
   }
 
   addDragOverClass(row, col) {
-    // FIXME
-    return false;
-    // return _.isEqual(this.state.draghover, [row, col]);
+    // console.log("drag over class", this.props.draghover, row, col);
+    return _.isEqual(this.props.draghover, [row, col]);
   }
 
   onDragEnter(event, row, col) {
     if (this.props.board[row][col] > 0) {
+      this.props.onDragEnter(-1, -1);
       return;
     }
-    this.setState({
-      draghover: [row, col],
-    });
-    console.log("Entered:", row, col);
+    this.props.onDragEnter(row, col);
   }
 
   onDragLeave(event, row, col) {
-    if (this.props.board[row][col] > 0) {
-      return;
-    }
-    this.setState({
-      draghover: [-1, -1],
-    });
-    console.log("Left:", row, col);
+    this.props.onDragLeave(row, col);
   }
 
   onDrop(event, row, col) {
     var value = parseInt(event.dataTransfer.getData("number"));
+    this.props.onDragEnter(-1, -1);
     this.props.onNewNumberDrop(row, col, value);
   }
 
@@ -117,25 +109,6 @@ class CellGrid extends Component {
       event.preventDefault();
     }
   }
-
-  // renderCells() {
-  //   let rowNums = [1, 2, 3];
-  //   return rowNums.map((row) => {
-  //     rowNums.map((row) => <div className="cell">{row}</div>);
-  //   });
-  // }
 }
-
-export class CellState {
-  constructor(number) {
-    this.number = number;
-    this.wrong = false;
-    this.latest = false;
-  }
-}
-
-export let cloneCellState = (cs) => {
-  // TODO
-};
 
 export default CellGrid;
