@@ -1,4 +1,4 @@
-## Sudoku
+## sūdoku
 
 Sudoku game and generator written in Javascript.
 
