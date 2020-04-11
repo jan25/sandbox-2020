@@ -4,7 +4,7 @@ Sudoku game and generator written in Javascript.
 
 The goal of Sudoku is to fill a 9×9 grid with numbers so that each row, column and 3×3 section contain all of the digits between 1 and 9.
 
-Click here to solve puzzles [jan25/sūdoku](https://jan25.github.io/sudoku)
+Click here to solve puzzles [jan25/sūdoku](https://jan25.github.io/sandbox-2020/sudoku/index.html)
 
 ## Develop
 
