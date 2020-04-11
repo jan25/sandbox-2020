@@ -35,6 +35,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="app">
+          <h1>sūdoku</h1>
           {!finished ? this.renderTopControls() : ""}
           <div className="grid-row">
             {!finished ? this.renderSideControls() : ""}
@@ -75,7 +76,11 @@ class App extends Component {
     return (
       <div className="bottom-controls">
         <Numbers vertical={false} />
-        <button onClick={this.reset}>Reset</button>
+        {this.state.stack.length > 0 ? (
+          <button onClick={this.reset}>Reset</button>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
