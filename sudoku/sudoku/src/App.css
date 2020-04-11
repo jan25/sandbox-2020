@@ -23,3 +23,25 @@ body,
   align-items: center;
   justify-content: center;
 }
+
+.welldone {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.top-controls {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bottom-controls {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

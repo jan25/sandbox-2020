@@ -17,4 +17,8 @@ export default class Generator {
       [0, 0, 0, 0, 8, 0, 0, 7, 9],
     ];
   }
+
+  shuffleRows() {}
+
+  shuffleCols() {}
 }
