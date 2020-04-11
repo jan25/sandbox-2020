@@ -21,6 +21,34 @@ export let isIncorrect = (board, coord) => {
   return false;
 };
 
+export let isGameFinished = (board) => {
+  let sz = 9;
+  let msz = 3;
+
+  for (let row = 0; row < sz; ++row) {
+    let nums = getRowNums(board, row);
+    if (_.uniq(nums).length !== sz) {
+      return false;
+    }
+  }
+  for (let col = 0; col < sz; ++col) {
+    let nums = getColNums(board, col);
+    if (_.uniq(nums).length !== sz) {
+      return false;
+    }
+  }
+  for (let i = 0; i < msz; ++i) {
+    for (let j = 0; j < msz; ++j) {
+      let nums = getBoxNums(i, j);
+      if (_.uniq(nums).length !== sz) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+};
+
 let getRowNums = (board, x) => {
   return _.filter(_.cloneDeep(board[x]), (num) => num > 0);
 };

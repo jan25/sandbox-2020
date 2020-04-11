@@ -4,7 +4,7 @@ import "./App.css";
 import TopGrid from "./components/TopGrid";
 import Numbers from "./components/Numbers";
 import Generator from "./components/Generator";
-import { isIncorrect } from "./components/Utils";
+import { isIncorrect, isGameFinished } from "./components/Utils";
 
 class App extends Component {
   constructor(props) {
@@ -19,6 +19,7 @@ class App extends Component {
     this.onNewNumberDrop = this.onNewNumberDrop.bind(this);
     this.getLastCoords = this.getLastCoords.bind(this);
     this.isLastIncorrect = this.isLastIncorrect.bind(this);
+    this.isGameFinished = this.isGameFinished.bind(this);
     this.reset = this.reset.bind(this);
   }
 
@@ -41,6 +42,7 @@ class App extends Component {
             onNewNumberDrop={this.onNewNumberDrop}
             lastCoords={this.getLastCoords()}
             isLastIncorrect={this.isLastIncorrect()}
+            isGameFinished={this.isGameFinished()}
           />
           <Numbers />
           <button onClick={this.reset}>reset</button>
@@ -99,6 +101,10 @@ class App extends Component {
 
   isLastIncorrect() {
     return isIncorrect(this.state.board, this.getLastCoords());
+  }
+
+  isGameFinished() {
+    return isGameFinished(this.state.board);
   }
 }
 
