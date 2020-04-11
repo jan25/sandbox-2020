@@ -4,6 +4,7 @@ import _ from "lodash";
 import "./App.css";
 import TopGrid from "./components/TopGrid";
 import Numbers from "./components/Numbers";
+import Info from "./components/Info";
 import Generator from "./components/Generator";
 import { isIncorrect, isGameFinished } from "./components/Utils";
 
@@ -13,7 +14,7 @@ class App extends Component {
     this.state = {
       board: [[]],
       stack: [],
-      gameon: false,
+      showInfo: false,
     };
     this.generator = new Generator();
     this.removeNumber = this.removeNumber.bind(this);
@@ -22,7 +23,10 @@ class App extends Component {
     this.isLastIncorrect = this.isLastIncorrect.bind(this);
     this.isGameFinished = this.isGameFinished.bind(this);
     this.newPuzzle = this.newPuzzle.bind(this);
+    this.toggleInfo = this.toggleInfo.bind(this);
     this.reset = this.reset.bind(this);
+
+    this.gameAreaRef = React.createRef();
   }
 
   componentDidMount() {
@@ -79,23 +83,29 @@ class App extends Component {
         <Numbers vertical={false} />
         <div className="control-buttons">
           {this.state.stack.length > 0 ? (
-            // <button onClick={this.reset}>Reset</button>
             <Button variant="outline-danger" size="sm" onClick={this.reset}>
               Reset
             </Button>
           ) : (
             ""
           )}
-          <Button variant="outline-primary" size="sm" onClick={this.renderInfo}>
+          {/* <Button variant="outline-primary" size="sm" onClick={this.toggleInfo}>
             Info
           </Button>
+          <div ref={this.gameAreaRef}>
+            <Info onInfoHide={this.toggleInfo} show={this.state.showInfo} />
+          </div> */}
         </div>
       </div>
     );
   }
 
-  renderInfo() {
+  toggleInfo() {
     console.log("render info");
+    const now = this.state.showInfo;
+    this.setState({
+      showInfo: !now,
+    });
   }
 
   renderWellDone() {
