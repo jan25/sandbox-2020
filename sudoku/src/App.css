@@ -48,13 +48,19 @@ body,
 }
 
 .bottom-controls {
-  width: 50%;
-  height: 15%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-items: center;
+}
+
+.control-buttons {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
 .control-buttons > button {
+  margin-top: 10px;
   margin-left: 10px;
+  margin-right: 10px;
 }

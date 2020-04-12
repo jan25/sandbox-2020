@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import _ from "lodash";
 import "./App.css";
 import TopGrid from "./components/TopGrid";
@@ -15,6 +15,7 @@ class App extends Component {
       board: [[]],
       stack: [],
       showInfo: false,
+      hintMode: false,
     };
     this.generator = new Generator();
     this.removeNumber = this.removeNumber.bind(this);
@@ -24,6 +25,7 @@ class App extends Component {
     this.isGameFinished = this.isGameFinished.bind(this);
     this.newPuzzle = this.newPuzzle.bind(this);
     this.toggleInfo = this.toggleInfo.bind(this);
+    this.toggleHintMode = this.toggleHintMode.bind(this);
     this.reset = this.reset.bind(this);
 
     this.gameAreaRef = React.createRef();
@@ -53,6 +55,7 @@ class App extends Component {
             />
             {!finished ? this.renderSideControls() : ""}
           </div>
+          {!finished ? this.renderTopControls() : ""}
           {!finished ? this.renderBottomControls() : this.renderWellDone()}
         </div>
       </React.Fragment>
@@ -78,8 +81,14 @@ class App extends Component {
   renderBottomControls() {
     return (
       <div className="bottom-controls">
-        <Numbers vertical={false} />
+        {/* <Numbers vertical={false} /> */}
         <div className="control-buttons">
+          <Form.Check
+            type="switch"
+            id="custom-switch"
+            label="Hint mode"
+            onChange={(ev) => this.toggleHintMode(ev)}
+          />
           {this.state.stack.length > 0 ? (
             <Button variant="outline-danger" size="sm" onClick={this.reset}>
               Reset
@@ -96,6 +105,13 @@ class App extends Component {
         </div>
       </div>
     );
+  }
+
+  toggleHintMode(event) {
+    console.log("toggle hint mode", event.target.checked);
+    this.setState({
+      hintMode: event.target.checked,
+    });
   }
 
   toggleInfo() {
