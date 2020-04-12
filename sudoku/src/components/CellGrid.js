@@ -57,11 +57,11 @@ class CellGrid extends Component {
     if (this.props.board[row][col] === 0) {
       return " hidden ";
     }
-    if (this.isHint(row, col)) {
-      return " text-primary ";
-    }
     if (this.isLast(row, col)) {
       return this.props.isLastIncorrect ? "incorrect" : "latest";
+    }
+    if (this.isHint(row, col)) {
+      return " text-primary ";
     }
     if (this.isAdded(row, col)) {
       return "correct";
