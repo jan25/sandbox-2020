@@ -60,10 +60,22 @@ class CellGrid extends Component {
     if (this.isLast(row, col)) {
       return this.props.isLastIncorrect ? "incorrect" : "latest";
     }
+    if (this.isHint(row, col)) {
+      return " text-primary ";
+    }
     if (this.isAdded(row, col)) {
       return "correct";
     }
     return "";
+  }
+
+  isHint(row, col) {
+    if (!this.props.hintMode) {
+      return false;
+    }
+    return _.find(this.props.hintStack, ([i, j]) => {
+      return i === row && j === col;
+    });
   }
 
   isAdded(row, col) {

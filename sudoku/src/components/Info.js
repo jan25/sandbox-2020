@@ -33,6 +33,9 @@ class Info extends Component {
               You can use <i>Reset</i> button at any time to reset puzzle to
               initial state
             </li>
+            <li>
+              You may use <i>Hint mode</i> to drop hints based on your guesses
+            </li>
           </ol>
         </Modal.Body>
       </Modal>

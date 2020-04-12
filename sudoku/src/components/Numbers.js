@@ -13,7 +13,12 @@ class Numbers extends Component {
   render() {
     let nums = _.range(1, 10);
     return (
-      <div className={this.props.vertical ? "vertical" : "horizontal"}>
+      <div
+        className={
+          (this.props.vertical ? "vertical" : "horizontal") +
+          (this.props.hintMode ? " text-primary" : "")
+        }
+      >
         {nums.map((num) => {
           return (
             <h3
