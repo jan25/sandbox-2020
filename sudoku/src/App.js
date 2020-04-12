@@ -14,8 +14,9 @@ class App extends Component {
     this.state = {
       board: [[]],
       stack: [],
-      showInfo: false,
+      hintStack: [],
       hintMode: false,
+      showInfo: false,
     };
     this.generator = new Generator();
     this.removeNumber = this.removeNumber.bind(this);
@@ -146,26 +147,52 @@ class App extends Component {
       _.slice(this.state.stack, 0, i),
       _.slice(this.state.stack, i + 1)
     );
-    this.setState({
-      board: newBoard,
-      stack: newStack,
+
+    let hintI = _.findIndex(this.state.hintStack, ([x, y]) => {
+      return x === row && y === col;
     });
+    if (hintI !== -1) {
+      let newHintStack = _.concat(
+        _.slice(this.state.hintStack, 0, i),
+        _.slice(this.state.hintStack, i + 1)
+      );
+      this.setState({
+        board: newBoard,
+        stack: newStack,
+        hintStack: newHintStack,
+      });
+    } else {
+      this.setState({
+        board: newBoard,
+        stack: newStack,
+      });
+    }
   }
 
   onNewNumberDrop(row, col, num) {
     // console.log("drop: ", num, "at: ", row, col);
     let newBoard = _.cloneDeep(this.state.board);
     newBoard[row][col] = num;
-    this.setState({
-      board: newBoard,
-      stack: _.concat(this.state.stack, [[row, col]]),
-    });
+
+    if (this.state.hintMode) {
+      this.setState({
+        board: newBoard,
+        hintStack: _.concat(this.state.hintStack, [[row, col]]),
+        stack: _.concat(this.state.stack, [[row, col]]),
+      });
+    } else {
+      this.setState({
+        board: newBoard,
+        stack: _.concat(this.state.stack, [[row, col]]),
+      });
+    }
   }
 
   newPuzzle() {
     this.setState({
       board: this.generator.generate(),
       stack: [],
+      hintStack: [],
     });
   }
 
@@ -177,6 +204,7 @@ class App extends Component {
     this.setState({
       board: resetBoard,
       stack: [],
+      hintStack: [],
     });
   }
 
