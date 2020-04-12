@@ -57,6 +57,9 @@ class CellGrid extends Component {
     if (this.props.board[row][col] === 0) {
       return " hidden ";
     }
+    if (this.isHint(row, col)) {
+      return " text-primary ";
+    }
     if (this.isLast(row, col)) {
       return this.props.isLastIncorrect ? "incorrect" : "latest";
     }
@@ -64,6 +67,15 @@ class CellGrid extends Component {
       return "correct";
     }
     return "";
+  }
+
+  isHint(row, col) {
+    if (!this.props.hintMode) {
+      return false;
+    }
+    return _.find(this.props.hintStack, ([i, j]) => {
+      return i === row && j === col;
+    });
   }
 
   isAdded(row, col) {

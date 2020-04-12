@@ -16,7 +16,7 @@ class Numbers extends Component {
       <div
         className={
           (this.props.vertical ? "vertical" : "horizontal") +
-          (this.props.hintMode ? " hintmode" : "")
+          (this.props.hintMode ? " text-primary" : "")
         }
       >
         {nums.map((num) => {

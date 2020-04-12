@@ -111,7 +111,7 @@ class App extends Component {
   }
 
   toggleHintMode(event) {
-    console.log("toggle hint mode", event.target.checked);
+    // console.log("toggle hint mode", event.target.checked);
     this.setState({
       hintMode: event.target.checked,
     });

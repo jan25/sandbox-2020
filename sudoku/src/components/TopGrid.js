@@ -33,6 +33,8 @@ class TopGrid extends Component {
                   col={col}
                   removeNumber={this.props.removeNumber}
                   onNewNumberDrop={this.props.onNewNumberDrop}
+                  hintMode={this.props.hintMode}
+                  hintStack={this.props.hintStack}
                   lastCoords={this.props.lastCoords}
                   isLastIncorrect={this.props.isLastIncorrect}
                   isGameFinished={this.props.isGameFinished}
