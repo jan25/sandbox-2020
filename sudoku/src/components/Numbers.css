@@ -17,3 +17,7 @@
 .number {
   cursor: grab;
 }
+
+.hintmode {
+  color: #ff6699;
+}

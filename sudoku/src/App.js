@@ -48,6 +48,8 @@ class App extends Component {
             <TopGrid
               board={this.state.board}
               added={this.state.stack}
+              hintMode={this.state.hintMode}
+              hintStack={this.state.hintStack}
               removeNumber={this.removeNumber}
               onNewNumberDrop={this.onNewNumberDrop}
               lastCoords={this.getLastCoords()}
@@ -66,7 +68,7 @@ class App extends Component {
   renderTopControls() {
     return (
       <div className="top-controls">
-        <Numbers vertical={false} />
+        <Numbers vertical={false} hintMode={this.state.hintMode} />
       </div>
     );
   }
@@ -74,7 +76,7 @@ class App extends Component {
   renderSideControls() {
     return (
       <div className="side-controls">
-        <Numbers vertical={true} />
+        <Numbers vertical={true} hintMode={this.state.hintMode} />
       </div>
     );
   }
@@ -82,12 +84,12 @@ class App extends Component {
   renderBottomControls() {
     return (
       <div className="bottom-controls">
-        {/* <Numbers vertical={false} /> */}
         <div className="control-buttons">
           <Form.Check
             type="switch"
             id="custom-switch"
             label="Hint mode"
+            checked={this.state.hintMode}
             onChange={(ev) => this.toggleHintMode(ev)}
           />
           {this.state.stack.length > 0 ? (
@@ -192,6 +194,7 @@ class App extends Component {
     this.setState({
       board: this.generator.generate(),
       stack: [],
+      hintMode: false,
       hintStack: [],
     });
   }
@@ -204,6 +207,7 @@ class App extends Component {
     this.setState({
       board: resetBoard,
       stack: [],
+      hintMode: false,
       hintStack: [],
     });
   }
