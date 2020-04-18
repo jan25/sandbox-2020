@@ -15,7 +15,7 @@ var rootCmd = &cobra.Command{
 	Short: "Your todo tracker",
 	Long: `Your Todo tracker
 
-Add your todos to this tool. You can update them as they are done.
+Track your todos with this tool. You can update them as they are done.
 You can also list all todos you have created or search by keywords.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("root.Run called")

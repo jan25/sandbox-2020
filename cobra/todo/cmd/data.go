@@ -20,7 +20,7 @@ func (t *Todo) markDone(done bool) {
 }
 
 // Fsdb refers to todo records stored
-// on file system
+// on disk/filesystem
 type Fsdb struct {
 	M map[string]*Todo
 }

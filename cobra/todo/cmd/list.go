@@ -10,6 +10,7 @@ import (
 var listCmd = &cobra.Command{
 	Use:   "list",
 	Short: "List your Todos",
+	Long:  "View all your Todos or search for specific Todos.",
 	Run: func(cmd *cobra.Command, args []string) {
 		getAllTodos()
 		fmt.Println("list.Run called")

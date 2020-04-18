@@ -8,7 +8,7 @@ import (
 
 // addCmd represents the add command
 var addCmd = &cobra.Command{
-	Use:   "add",
+	Use:   "add [name]",
 	Short: "Add a new todo",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Printf("add todo %s \n", args[0])

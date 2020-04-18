@@ -8,10 +8,10 @@ import (
 
 // markCmd represents the mark command
 var markCmd = &cobra.Command{
-	Use:   "mark",
+	Use:   "mark [name]",
 	Short: "Mark a todo as done",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		name := args[0]
+		name := args[0] // TODO concat args for spaced name
 		done, _ := cmd.Flags().GetBool("done")
 		if err := markDone(name, done); err != nil {
 			return err
