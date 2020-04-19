@@ -18,9 +18,6 @@ var rootCmd = &cobra.Command{
 
 Track your todos with this tool. You can update them as they are done.
 You can also list all todos you have created or search by keywords.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("root.Run called")
-	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -32,14 +29,17 @@ func Execute() {
 	}
 }
 
+// init is called for all childCmd before reaching rootCmd
+// all of it is before Run is called
 func init() {
+	// add to list of initalizers
 	cobra.OnInitialize((initConfig))
 
+	// initialise database
 	data.InitFsdb()
-
-	fmt.Println("root.init called")
 }
 
 func initConfig() {
-	fmt.Println("root.initConfig called")
+	// Initilizes config before Run() is called
+	// fmt.Println("root.initConfig called")
 }

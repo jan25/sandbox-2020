@@ -11,10 +11,14 @@ import (
 var addCmd = &cobra.Command{
 	Use:   "add [name]",
 	Short: "Add a new todo",
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return fmt.Errorf("Provide name to add new todo")
+		}
 		name := args[0]
 		data.AddTodo(name)
-		fmt.Printf("Successfuly added %s \n", name)
+		fmt.Printf("Successfuly added %s!\n", name)
+		return nil
 	},
 }
 

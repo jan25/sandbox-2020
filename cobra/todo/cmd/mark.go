@@ -12,20 +12,26 @@ var markCmd = &cobra.Command{
 	Use:   "mark [name]",
 	Short: "Mark a todo as done",
 	RunE: func(cmd *cobra.Command, args []string) error {
-		name := args[0] // TODO concat args for spaced name
+		if len(args) == 0 {
+			return fmt.Errorf("Provide name to update a todo")
+		}
+		name := args[0]
 		done, _ := cmd.Flags().GetBool("done")
 		if err := data.MarkDone(name, done); err != nil {
 			return err
 		}
-		fmt.Printf("Success! Marked %s as done=%v \n", name, done)
+		doneStr := "done"
+		if !done {
+			doneStr = "undone"
+		}
+		fmt.Printf("Success! Marked %s as %s\n", name, doneStr)
 		return nil
 	},
 }
 
+// Here you will define your flags and configuration settings.
 func init() {
 	rootCmd.AddCommand(markCmd)
-
-	// Here you will define your flags and configuration settings.
 
 	markCmd.Flags().BoolP("done", "d", true, "true to mark todo as done, false to mark as undone")
 }
