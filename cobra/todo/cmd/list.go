@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/jan25/sandbox-2020/cobra/todo/data"
 	"github.com/spf13/cobra"
 )
 
@@ -12,7 +13,7 @@ var listCmd = &cobra.Command{
 	Short: "List your Todos",
 	Long:  "View all your Todos or search for specific Todos.",
 	Run: func(cmd *cobra.Command, args []string) {
-		getAllTodos()
+		data.GetAllTodos()
 		fmt.Println("list.Run called")
 	},
 }

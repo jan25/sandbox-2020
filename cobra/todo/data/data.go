@@ -1,4 +1,4 @@
-package cmd
+package data
 
 import (
 	"encoding/json"
@@ -43,7 +43,7 @@ func newFsdb() *Fsdb {
 	}
 }
 
-func initFsdb() {
+func InitFsdb() {
 	path := fullFilePath()
 
 	// create file if not exists
@@ -97,7 +97,7 @@ func check(err error) {
 	}
 }
 
-func getAllTodos() {
+func GetAllTodos() {
 	if len(f.M) == 0 {
 		fmt.Println("No todos available!")
 		return
@@ -108,13 +108,13 @@ func getAllTodos() {
 	}
 }
 
-func addTodo(name string) {
+func AddTodo(name string) {
 	f.M[name] = newTodo(name)
 
 	writeFile()
 }
 
-func markDone(name string, done bool) error {
+func MarkDone(name string, done bool) error {
 	t, ok := f.M[name]
 	if !ok {
 		return fmt.Errorf("Invalid name %s", name)

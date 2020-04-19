@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/jan25/sandbox-2020/cobra/todo/data"
 	"github.com/spf13/cobra"
 )
 
@@ -12,7 +13,7 @@ var addCmd = &cobra.Command{
 	Short: "Add a new todo",
 	Run: func(cmd *cobra.Command, args []string) {
 		name := args[0]
-		addTodo(name)
+		data.AddTodo(name)
 		fmt.Printf("Successfuly added %s \n", name)
 	},
 }

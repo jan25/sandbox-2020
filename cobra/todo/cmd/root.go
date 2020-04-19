@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/jan25/sandbox-2020/cobra/todo/data"
 	"github.com/spf13/cobra"
 )
 
@@ -34,7 +35,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize((initConfig))
 
-	initFsdb()
+	data.InitFsdb()
 
 	fmt.Println("root.init called")
 }

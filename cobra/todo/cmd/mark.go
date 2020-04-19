@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/jan25/sandbox-2020/cobra/todo/data"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +14,7 @@ var markCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		name := args[0] // TODO concat args for spaced name
 		done, _ := cmd.Flags().GetBool("done")
-		if err := markDone(name, done); err != nil {
+		if err := data.MarkDone(name, done); err != nil {
 			return err
 		}
 		fmt.Printf("Success! Marked %s as done=%v \n", name, done)
