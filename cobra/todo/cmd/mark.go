@@ -20,11 +20,6 @@ var markCmd = &cobra.Command{
 		if err := data.MarkDone(name, done); err != nil {
 			return err
 		}
-		doneStr := "done"
-		if !done {
-			doneStr = "undone"
-		}
-		fmt.Printf("Success! Marked %s as %s\n", name, doneStr)
 		return nil
 	},
 }

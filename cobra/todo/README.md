@@ -5,7 +5,7 @@ A simple app to keep track of your todos via cli implemented using Cobra cli fw.
 ## Install and Features
 
 ```
-go install -u github.com/jan25/sandbox-2020/cobra/todo
+go install -i github.com/jan25/sandbox-2020/cobra/todo
 
 todo -h
 todo add "Next awesome thing todo"

@@ -17,7 +17,6 @@ var addCmd = &cobra.Command{
 		}
 		name := args[0]
 		data.AddTodo(name)
-		fmt.Printf("Successfuly added %s!\n", name)
 		return nil
 	},
 }

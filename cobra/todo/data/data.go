@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/hackebrot/turtle"
 	"github.com/mitchellh/go-homedir"
 )
 
@@ -99,12 +100,16 @@ func check(err error) {
 
 func GetAllTodos() {
 	if len(f.M) == 0 {
-		fmt.Println("No todos available!")
+		fmt.Printf("%s No todos available!\n", getEmoji("zero"))
 		return
 	}
 
 	for name, todo := range f.M {
-		fmt.Println(name, todo.Done)
+		emoji := "white_check_mark"
+		if !todo.Done {
+			emoji = "apple"
+		}
+		fmt.Printf("%s %s\n", getEmoji(emoji), name)
 	}
 }
 
@@ -112,6 +117,7 @@ func AddTodo(name string) {
 	f.M[name] = newTodo(name)
 
 	writeFile()
+	fmt.Printf("%s Added %s!\n", getEmoji("green_apple"), name)
 }
 
 func MarkDone(name string, done bool) error {
@@ -122,5 +128,17 @@ func MarkDone(name string, done bool) error {
 	t.Done = done
 
 	writeFile()
+	doneStr := "done"
+	if !done {
+		doneStr = "undone"
+	}
+	fmt.Printf("%s Success! Marked %s as %s\n", getEmoji("white_check_mark"), name, doneStr)
 	return nil
+}
+
+func getEmoji(name string) string {
+	if emoji, ok := turtle.Emojis[name]; ok {
+		return " " + emoji.Char + " "
+	}
+	return ""
 }
