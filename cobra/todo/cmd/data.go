@@ -1,6 +1,16 @@
 package cmd
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"os"
+	"path/filepath"
+
+	"github.com/mitchellh/go-homedir"
+)
+
+const filePath = "todo/todo.json"
 
 // Todo stores metadata for todo item
 type Todo struct {
@@ -27,25 +37,81 @@ type Fsdb struct {
 
 var f *Fsdb
 
-func initFsdb() {
-	// TODO read from disk
-	m := map[string]*Todo{
-		"first thing":  newTodo("first thing"),
-		"second thing": newTodo("second thing"),
+func newFsdb() *Fsdb {
+	return &Fsdb{
+		M: make(map[string]*Todo),
 	}
-	f = &Fsdb{
-		M: m,
+}
+
+func initFsdb() {
+	path := fullFilePath()
+
+	// create file if not exists
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err := os.MkdirAll(filepath.Dir(path), os.ModePerm)
+		check(err)
+
+		f, err := os.Create(path)
+		check(err)
+
+		_, err = f.Write([]byte("{}"))
+		check(err)
+
+		f.Close()
+	}
+
+	readFile()
+}
+
+func fullFilePath() string {
+	homeDir, err := homedir.Dir()
+	check(err)
+
+	return filepath.Join(homeDir, filePath)
+}
+
+func readFile() {
+	path := fullFilePath()
+
+	bytes, err := ioutil.ReadFile(path)
+	check(err)
+
+	f = newFsdb()
+	err = json.Unmarshal(bytes, &f.M)
+	check(err)
+}
+
+func writeFile() {
+	path := fullFilePath()
+
+	bytes, err := json.Marshal(f.M)
+	check(err)
+
+	err = ioutil.WriteFile(path, bytes, os.ModePerm)
+	check(err)
+}
+
+func check(err error) {
+	if err != nil {
+		panic(err)
 	}
 }
 
 func getAllTodos() {
+	if len(f.M) == 0 {
+		fmt.Println("No todos available!")
+		return
+	}
+
 	for name, todo := range f.M {
-		fmt.Println(name, todo)
+		fmt.Println(name, todo.Done)
 	}
 }
 
 func addTodo(name string) {
 	f.M[name] = newTodo(name)
+
+	writeFile()
 }
 
 func markDone(name string, done bool) error {
@@ -55,11 +121,6 @@ func markDone(name string, done bool) error {
 	}
 	t.Done = done
 
-	writeToDisk()
-
+	writeFile()
 	return nil
-}
-
-func writeToDisk() {
-	// TODO
 }
