@@ -29,3 +29,5 @@ npm run deploy
 - Deploy to gh pages on custom /sudoku folder
 - Implement custom puzzle generator logic (e.g. https://dlbeer.co.nz/articles/sudoku.html)
 - Mobile site support
+- Add emojis around Well done message. or anywhere else
+- Group puzzles in difficulty levels. And add chooser in UI
