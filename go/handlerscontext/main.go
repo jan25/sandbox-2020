@@ -6,14 +6,20 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"os"
+	"os/signal"
 	"strconv"
 	"strings"
+	"syscall"
+	"time"
 
 	"context"
 )
 
+// wrapper type for context key types
 type contextKey string
 
+// some helper constants for headers and context value parsing
 const (
 	requestID     = "requestID"
 	tracingheader = "customtracingheader" // "traceid-parentid"
@@ -87,15 +93,45 @@ func main() {
 	mux.Handle("/", rh)
 	mux.Handle("/child", ch)
 
-	if err := http.ListenAndServe(":8080", mux); err != nil {
-		log.Fatal(err)
+	srv := http.Server{
+		Addr:    ":8080",
+		Handler: mux,
 	}
+
+	idleConnsClosed := make(chan struct{})
+	go func() {
+		// wait for interrupt signals to shutdown
+		interrupts := make(chan os.Signal, 1)
+		signal.Notify(interrupts, os.Interrupt)
+		signal.Notify(interrupts, syscall.SIGTERM)
+		<-interrupts
+
+		log.Printf("Shutting down server..")
+
+		// Give 5 seconds to shutdown
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel() // cancel early if shutdown finished earlier
+		if err := srv.Shutdown(ctx); err != nil {
+			// error in shutdown or context timed out
+			log.Printf("Error from server Shutdown. err = %v", err)
+		}
+
+		close(idleConnsClosed)
+	}()
+
+	if err := srv.ListenAndServe(); err != http.ErrServerClosed {
+		log.Fatalf("HTTP ListenAndServe err: %v", err)
+	}
+
+	// wait for connections to be closed after shutdown
+	<-idleConnsClosed
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	id := ctx.Value(contextKey(requestID))
 	w.Write([]byte("root: hello child!\n"))
+	w.Write([]byte("waiting for reply..\n"))
 
 	req, err := http.NewRequest("GET", "http://localhost:8080/child", nil)
 	if err != nil {
@@ -103,7 +139,6 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Error calling /child"))
 		return
 	}
-
 	tid := ctx.Value(contextKey(traceID))
 	header := fmt.Sprintf("%s%s%s", tid, traceSep, id)
 	req.Header.Set(tracingheader, header)
@@ -126,7 +161,9 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func childHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("child: say hello to root\n"))
+	// sleep to delay response
+	time.Sleep(3 * time.Second)
+	w.Write([]byte("child: saying hello back to root\n"))
 }
 
 func randID() string {
