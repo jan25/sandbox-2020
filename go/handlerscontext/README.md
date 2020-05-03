@@ -1,6 +1,15 @@
 ## Sample http server with logging, tracing and graceful shutdown
 
-`go run main.go` to start the server and `curl localhost:8080` in different terminal to see logs printed from server.
+`go run main.go` to start the server and `curl localhost:8080` in different terminal to see logs printed from server. Example logs:
+
+```
+2020/05/03 16:05:15 [5577006791947779410] Start of request. path=/
+2020/05/03 16:05:15 traceID=8674665223082153551; parentID: nil
+2020/05/03 16:05:15 [6129484611666145821] Start of request. path=/child
+2020/05/03 16:05:15 traceID=8674665223082153551; parentID:5577006791947779410
+2020/05/03 16:05:15 [6129484611666145821] End of request. path=/child
+2020/05/03 16:05:15 [5577006791947779410] End of request. path=/
+```
 
 `main.go` makes use of middlewares to inject and extract request info into global Context, which are avaible throught out request lifecycle.
 

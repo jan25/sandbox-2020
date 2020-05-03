@@ -41,7 +41,7 @@ func tracingMiddleware(next http.Handler) http.Handler {
 		if xID == "" {
 			t := randID()
 			ctx = context.WithValue(ctx, contextKey(traceID), t)
-			ctx = context.WithValue(ctx, contextKey(parentID), "")
+			ctx = context.WithValue(ctx, contextKey(parentID), "nil")
 		} else {
 			parts := strings.Split(xID, traceSep)
 			ctx = context.WithValue(ctx, contextKey(traceID), parts[0])
