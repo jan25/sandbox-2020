@@ -13,9 +13,12 @@ import (
 
 // A simple password generator service
 
-func main() {
-	mux := http.NewServeMux()
+var requests *expvar.Int
 
+func main() {
+	requests = expvar.NewInt("requests")
+
+	mux := http.NewServeMux()
 	mux.Handle("/debug/vars", expvar.Handler())
 	mux.Handle("/password", http.HandlerFunc(generatePassword))
 
@@ -25,6 +28,8 @@ func main() {
 }
 
 func generatePassword(w http.ResponseWriter, r *http.Request) {
+	requests.Add(1)
+
 	params, err := url.ParseQuery(r.URL.RawQuery)
 	if err != nil {
 		panic(err)
