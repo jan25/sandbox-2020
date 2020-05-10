@@ -1,6 +1,7 @@
 package main
 
 import (
+	"expvar"
 	"log"
 	"net/http"
 	"net/url"
@@ -15,7 +16,8 @@ import (
 func main() {
 	mux := http.NewServeMux()
 
-	mux.Handle("/", http.HandlerFunc(generatePassword))
+	mux.Handle("/debug/vars", expvar.Handler())
+	mux.Handle("/password", http.HandlerFunc(generatePassword))
 
 	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Fatal(err)
