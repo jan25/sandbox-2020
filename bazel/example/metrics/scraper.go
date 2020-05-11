@@ -62,7 +62,7 @@ func drawHistogram() {
 		tm.Println("HTTP Request count metric")
 		tm.Println("(Latest scrapped metric last)")
 		for _, l := range histogram {
-			tm.Println(strings.Repeat("*", l))
+			tm.Println("|" + strings.Repeat("*", l))
 		}
 	}
 

@@ -15,11 +15,9 @@ import (
 // A simple password generator service
 
 func main() {
-	requests = expvar.NewInt("requests")
-
 	mux := http.NewServeMux()
-	mux.Handle("/debug/vars", clientlib.CollectMiddleware(expvar.Handler()))
-	mux.Handle("/password", clientlib.Middleware(generatePassword))
+	mux.Handle("/debug/vars", clientlib.CollectorMiddleware(expvar.Handler()))
+	mux.Handle("/password", clientlib.Middleware(http.HandlerFunc(generatePassword)))
 
 	if err := http.ListenAndServe(":8080", mux); err != nil {
 		log.Fatal(err)

@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+// Simple metrics library to count number of requests
+// Resets on each metric collection
+
 var requests *expvar.Int
 
 func init() {
