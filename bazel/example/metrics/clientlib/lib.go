@@ -11,9 +11,7 @@ import (
 var requests *expvar.Int
 
 func init() {
-	if requests == nil {
-		requests = expvar.NewInt("requests")
-	}
+	requests = expvar.NewInt("requests")
 }
 
 // Middleware wraps handlers to collect metrics

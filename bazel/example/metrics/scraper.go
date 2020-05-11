@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"math/rand"
 	"net/http"
 	"os"
 	"os/signal"
@@ -16,7 +15,7 @@ import (
 )
 
 // Scrapes metrics from service running on same host (localhost:8080)
-// Prints scrapped metrics to STDOUT
+// Prints scrapped metrics to STDOUT as histogram
 
 const (
 	maxHistogramLen = 10
@@ -92,13 +91,4 @@ func scrapeMetrics() {
 	if len(histogram) > maxHistogramLen {
 		histogram = histogram[len(histogram)-maxHistogramLen:]
 	}
-}
-
-func testHistogram() []int {
-	// TODO add min max scaling
-	h := make([]int, 0)
-	for i := 0; i < maxHistogramLen; i++ {
-		h = append(h, rand.Int()%30)
-	}
-	return h
 }
