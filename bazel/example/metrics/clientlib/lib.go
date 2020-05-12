@@ -14,7 +14,7 @@ func init() {
 	requests = expvar.NewInt("requests")
 }
 
-// Middleware wraps handlers to collect metrics
+// Middleware wraps handlers to collect metrics for
 func Middleware(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		requests.Add(1)
