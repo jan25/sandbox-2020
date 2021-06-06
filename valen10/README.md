@@ -8,7 +8,7 @@ This app also works Offline; Only the first time you load the webpage should you
 
 By the way a quick taal lesson here, number 10 in Dutch is tien(said like teeen). So you see a 10 in this projects name too. And, now, taal in Dutch means language :)
 
-You can play the game at [jan25.github.io/sandbox-2020/valen10](https://jan25.github.io/sandbox-2020/valen10/index.html)
+You can play the game at [jan25.github.io/sandbox-2020/valen10](https://jan25.github.io/sandbox-2020/index.html)
 
 <hr>
 References
